@@ -11,6 +11,7 @@ import { authGuard } from './main/guard/auth.guard';
                 path: '', component: AppLayoutComponent,
                 children: [
                     // Main
+                    { path: 'raffle', loadChildren: () => import('./main/components/raffle/raffle.module').then(m => m.RaffleModule) },
                 ],
                 canActivate: [authGuard]
             },
