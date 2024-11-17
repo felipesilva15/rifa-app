@@ -36,8 +36,8 @@ export class ListRaffleComponent {
         this.records = data;
 
         this.records.forEach((record) => {
-          record.start_date = new Date(<Date>record.start_date + 'T03:00:00.000Z');
-          record.end_date = new Date(<Date>record.end_date + 'T03:00:00.000Z');
+          record.start_date = new Date(<Date>record.start_date);
+          record.end_date = new Date(<Date>record.end_date);
         });
 
 

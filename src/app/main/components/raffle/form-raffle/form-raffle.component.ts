@@ -63,8 +63,8 @@ export class FormRaffleComponent {
           name: this.data.name,
           maximum_numbers: this.data.maximum_numbers,
           ticket_value: this.data.ticket_value,
-          start_date: new Date(<Date>this.data.start_date + 'T03:00:00.000Z'),
-          end_date: new Date(<Date>this.data.end_date + 'T03:00:00.000Z')
+          start_date: new Date(<Date>this.data.start_date),
+          end_date: new Date(<Date>this.data.end_date)
         });
 
         this.isLoading = false;
