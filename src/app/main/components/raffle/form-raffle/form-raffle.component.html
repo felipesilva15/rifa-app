@@ -1,0 +1,81 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between">
+                <h4>Rifa</h4>
+				<button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-secondary p-button-text p-0 w-2rem h-2rem" (click)="backPage()"></button>
+			</div>
+            <div class="p-fluid p-formgrid grid mt-1 animation-duration-600 fadein" [formGroup]="formGroup" *ngIf="!isLoading; else loagingSkeleton">
+				<div class="field col-12 py-0">
+					<label htmlFor="name">Nome<span class="text-red-500 font-bold">*</span></label>
+					<input id="name" formControlName="name" pInputText required autofocus [ngClass]="{'ng-invalid ng-dirty' : name.invalid && (name.dirty || name.touched)}"/>
+					<div *ngIf="name.invalid && (name.dirty || name.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="name.errors?.['required']">Este campo é obrigatório.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="name.errors?.['maxlength']">Este campo deve ter no máximo {{ name.errors?.['maxlength'].requiredLength }} caracteres.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="name.errors?.['minLength']">Este campo deve ter no mínimo {{ name.errors?.['minLength'].requiredLength }} caracteres.</small>
+                    </div>
+				</div>
+				<div class="field col-12 md:col-6 py-0">
+					<label htmlFor="maximum_numbers">Qtd. de números<span class="text-red-500 font-bold">*</span></label>
+					<p-inputNumber id="maximum_numbers" formControlName="maximum_numbers" [showButtons]="true" [min]="0" [ngClass]="{'ng-invalid ng-dirty' : name.invalid && (name.dirty || name.touched)}"></p-inputNumber>
+                    <div *ngIf="maximum_numbers.invalid && (maximum_numbers.dirty || maximum_numbers.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="maximum_numbers.errors?.['required']">Este campo é obrigatório.</small>
+                    </div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="ticket_value">Vl. Bilhete<span class="text-red-500 font-bold">*</span></label>
+					<p-inputNumber id="ticket_value" formControlName="ticket_value" mode="currency" currency="BRL" [min]="0" locale="pt-BR" [showButtons]="true" mode="currency" [ngClass]="{'ng-invalid ng-dirty' : ticket_value.invalid && (ticket_value.dirty || ticket_value.touched)}"></p-inputNumber>
+					<div *ngIf="ticket_value.invalid && (ticket_value.dirty || ticket_value.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="ticket_value.errors?.['required']">Este campo é obrigatório.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="ticket_value.errors?.['min']">Este campo deve ter no mínimo {{ ticket_value.errors?.['min'].min | currency: 'BRL' }}.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="ticket_value.errors?.['max']">Este campo deve ter no máximo {{ ticket_value.errors?.['max'].max | currency: 'BRL' }}.</small>
+					</div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="start_date">Dt. Início<span class="text-red-500 font-bold">*</span></label>
+					<p-calendar id="start_date" type="start_date" [maxDate]="maxBirthDate" formControlName="start_date" inputId="icon" [showIcon]="true" dateFormat="dd/mm/yy" required [ngClass]="{'ng-invalid ng-dirty' : start_date.invalid && (start_date.dirty || start_date.touched)}"></p-calendar>
+					<div *ngIf="start_date.invalid && (start_date.dirty || start_date.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="start_date.errors?.['required']">Este campo é obrigatório.</small>
+					</div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="end_date">Dt. Fim</label>
+					<p-calendar id="end_date" type="end_date" [maxDate]="maxBirthDate" formControlName="end_date" inputId="icon" [showIcon]="true" dateFormat="dd/mm/yy" required [ngClass]="{'ng-invalid ng-dirty' : end_date.invalid && (end_date.dirty || end_date.touched)}"></p-calendar>
+					<div *ngIf="end_date.invalid && (end_date.dirty || end_date.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="end_date.errors?.['required']">Este campo é obrigatório.</small>
+					</div>
+				</div>
+				<div class="field col-12 flex justify-content-end mb-0 py-0">
+					<button pButton pRipple label="Salvar" class="p-button-primary md:w-min" [loading]="isSubmitting" (click)="submit()"></button>
+				</div>
+			</div>
+            <ng-template #loagingSkeleton >
+				<div class="p-fluid p-formgrid grid mt-1">
+					<div field class="field col-12 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div class="field col-12 flex justify-content-end mb-0 py-0">
+						<p-skeleton class="md:w-min" width="80px" height="40px"></p-skeleton>
+					</div>
+				</div>
+			</ng-template>
+        </div>
+    </div>
+</div>
