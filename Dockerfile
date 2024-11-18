@@ -12,7 +12,7 @@ FROM nginx:alpine
 
 VOLUME /var/cache/nginx
 
-COPY --from=build app/dist/team-drawer /usr/share/nginx/html
+COPY --from=build app/dist/rifa-app /usr/share/nginx/html
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
