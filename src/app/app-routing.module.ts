@@ -12,6 +12,7 @@ import { authGuard } from './main/guard/auth.guard';
                 children: [
                     // Main
                     { path: 'raffle', loadChildren: () => import('./main/components/raffle/raffle.module').then(m => m.RaffleModule) },
+                    { path: 'participant', loadChildren: () => import('./main/components/participant/participant.module').then(m => m.ParticipantModule) },
                 ],
                 canActivate: [authGuard]
             },
