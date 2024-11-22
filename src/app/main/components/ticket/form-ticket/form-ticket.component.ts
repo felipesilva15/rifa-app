@@ -8,6 +8,7 @@ import { Raffle } from 'src/app/main/api/raffle';
 import { Ticket } from 'src/app/main/api/ticket';
 import { ParticipantService } from 'src/app/main/service/participant.service';
 import { TicketService } from 'src/app/main/service/ticket.service';
+import { TicketResource } from 'src/app/main/api/ticketResource';
 
 @Component({
   selector: 'app-form-ticket',
@@ -24,6 +25,7 @@ export class FormTicketComponent {
   paramId: number;
   participants: Participant[] = [];
   raffles: Raffle[] = [];
+  selectedRaffle: Raffle;
 
   constructor(
     private ticketService: TicketService, 
@@ -58,7 +60,7 @@ export class FormTicketComponent {
       participant_id: [this.data.participant_id, [Validators.required]],
       raffle_id: [this.data.raffle_id, [Validators.required]],
       number: [this.data.number, [Validators.required, Validators.min(1)]],
-      value: [this.data.value, [Validators.required, Validators.max(999.99), Validators.min(0.01)]],
+      value: [{value: this.data.value, disabled: true}, []],
       payment_date: [this.data.payment_date, []]
     });
   }
@@ -67,7 +69,7 @@ export class FormTicketComponent {
     this.isLoading = true;
 
     this.ticketService.get(this.paramId).subscribe({
-      next: (res: Ticket) => {
+      next: (res: TicketResource) => {
         this.data = res;
 
         this.formGroup.patchValue({
@@ -75,7 +77,7 @@ export class FormTicketComponent {
           raffle_id: this.data.raffle_id,
           number: this.data.number,
           value: this.data.value,
-          payment_date: new Date(<Date>this.data.payment_date)
+          payment_date: this.data.payment_date ? new Date(<Date>this.data.payment_date) : null
         });
 
         this.isLoading = false;
@@ -132,7 +134,7 @@ export class FormTicketComponent {
     this.data.raffle_id = this.raffle_id.value;
     this.data.number = this.number.value;
     this.data.value = this.value.value;
-    this.data.payment_date = this.payment_date.value.toISOString().substring(0, 10);
+    this.data.payment_date = this.payment_date.value ? this.payment_date.value.toISOString().substring(0, 10) : null;
   }
 
   submit(): void {
@@ -187,5 +189,16 @@ export class FormTicketComponent {
 
   backPage(): void {
     this.location.back();
+  }
+
+  onChangeRaffle(event): void {
+    this.selectedRaffle = this.raffles.find((raffle) => {
+      return raffle.id == this.raffle_id.value
+    })
+
+    if (!this.paramId) {
+      this.value.setValue(this.selectedRaffle.ticket_value);
+    }
+    
   }
 }

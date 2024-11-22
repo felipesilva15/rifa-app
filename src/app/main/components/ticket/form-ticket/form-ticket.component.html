@@ -8,7 +8,7 @@
             <div class="p-fluid p-formgrid grid mt-1 animation-duration-600 fadein" [formGroup]="formGroup" *ngIf="!isLoading; else loagingSkeleton">
                 <div class="field col-12 md:col-6 py-0">
 					<label htmlFor="raffle_id">Rifa<span class="text-red-500 font-bold">*</span></label>
-					<p-dropdown [options]="raffles" [loading]="isLoadingRaffles" [showClear]="true" optionLabel="name" [filter]="true" filterBy="name" optionValue="id" id="raffle_id" formControlName="raffle_id" [ngClass]="{'ng-invalid ng-dirty' : raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)}"></p-dropdown>
+					<p-dropdown [options]="raffles" [loading]="isLoadingRaffles" [showClear]="true" optionLabel="name" [filter]="true"  (onChange)="onChangeRaffle($event)" filterBy="name" optionValue="id" id="raffle_id" formControlName="raffle_id" [ngClass]="{'ng-invalid ng-dirty' : raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)}"></p-dropdown>
 					<div *ngIf="raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)">
 						<small class="ng-dirty ng-invalid" *ngIf="raffle_id.errors?.['required']">Este campo é obrigatório.</small>
 					</div>
@@ -29,7 +29,7 @@
                     </div>
 				</div>
                 <div class="field col-12 md:col-6 py-0">
-					<label htmlFor="value">Vl. Bilhete<span class="text-red-500 font-bold">*</span></label>
+					<label htmlFor="value">Vl. Bilhete</label>
 					<p-inputNumber id="value" formControlName="value" mode="currency" currency="BRL" [min]="0" locale="pt-BR" [showButtons]="true" mode="currency" [ngClass]="{'ng-invalid ng-dirty' : value.invalid && (value.dirty || value.touched)}"></p-inputNumber>
 					<div *ngIf="value.invalid && (value.dirty || value.touched)">
 						<small class="ng-dirty ng-invalid" *ngIf="value.errors?.['required']">Este campo é obrigatório.</small>
@@ -39,7 +39,7 @@
 				</div>
                 <div class="field col-12 md:col-6 py-0">
 					<label htmlFor="payment_date">Dt. Pagamento</label>
-					<p-calendar id="payment_date" type="payment_date" formControlName="payment_date" inputId="icon" [showIcon]="true" dateFormat="dd/mm/yy" [ngClass]="{'ng-invalid ng-dirty' : payment_date.invalid && (payment_date.dirty || payment_date.touched)}"></p-calendar>
+					<p-calendar id="payment_date" type="payment_date" formControlName="payment_date" [showClear]="true" inputId="icon" [showIcon]="true" dateFormat="dd/mm/yy" [ngClass]="{'ng-invalid ng-dirty' : payment_date.invalid && (payment_date.dirty || payment_date.touched)}"></p-calendar>
 					<div *ngIf="payment_date.invalid && (payment_date.dirty || payment_date.touched)">
 						<small class="ng-dirty ng-invalid" *ngIf="payment_date.errors?.['required']">Este campo é obrigatório.</small>
 					</div>
@@ -50,7 +50,7 @@
 			</div>
             <ng-template #loagingSkeleton >
 				<div class="p-fluid p-formgrid grid mt-1">
-					<div field class="field col-12 py-0">
+					<div field class="field col-12 md:col-6 py-0">
 						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
 						<p-skeleton width="100%" height="39px"></p-skeleton>
 					</div>
