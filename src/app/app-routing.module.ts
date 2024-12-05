@@ -18,6 +18,9 @@ import { authGuard } from './main/guard/auth.guard';
                 canActivate: [authGuard]
             },
 
+            // Main
+            { path: 'auth', loadChildren: () => import('./main/components/auth/auth.module').then(m => m.AuthModule) },
+
             // Generic
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },

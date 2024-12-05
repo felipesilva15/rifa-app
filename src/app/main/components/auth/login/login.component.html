@@ -1,0 +1,23 @@
+<div class="flex align-items-center justify-content-center min-h-screen">
+    <div class="col-12 xl:col-3 lg:col-5 md:col-6 sm:col-8 p-0 flex flex-column align-items-center justify-content-center login-card">
+        <img src="assets/layout/images/logo-dark.svg" alt="Fit motive logo" class="w-6rem flex-shrink-0 mt-4">                
+        <div class="w-full pb-6 pt-3 px-5 p-fluid">
+            <h1 class="text-center mb-6">
+                Acesse sua conta
+            </h1>
+            <div>
+                <div class="field">
+                    <label htmlFor="email">E-mail</label>
+                    <input id="email" type="text" [(ngModel)]="user.email" pInputText required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.email}" />
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.email">Informe seu e-mail.</small>
+                </div>
+                <div class="field">
+                    <label htmlFor="password">Senha</label>
+                    <p-password id="password" [(ngModel)]="user.password" [toggleMask]="true" [feedback]="false" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.password}"></p-password>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.password">Informe sua senha.</small>
+                </div>
+                <button pButton pRipple label="Login" class="mt-4" [loading]="isLoading" [disabled]="!user.email || !user.password" (click)="login()"></button>
+            </div>
+        </div>
+    </div>
+</div>
