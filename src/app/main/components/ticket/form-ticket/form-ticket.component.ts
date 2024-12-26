@@ -59,7 +59,7 @@ export class FormTicketComponent {
     return this.fb.group({
       participant_id: [this.data.participant_id, [Validators.required]],
       raffle_id: [this.data.raffle_id, [Validators.required]],
-      number: [this.data.number, [Validators.required, Validators.min(1)]],
+      number: [this.data.number, [Validators.required, Validators.min(0)]],
       value: [{value: this.data.value, disabled: true}, []],
       payment_date: [this.data.payment_date, []]
     });
