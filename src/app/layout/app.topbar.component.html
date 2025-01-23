@@ -13,10 +13,10 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <p-menu #profileMenu [popup]="true" [model]="profileMenuItems"></p-menu>
+        <p-menu #profileMenu [popup]="true" [model]="profileMenuItems" appendTo="body" />
         <button class="p-link layout-topbar-button" (click)="profileMenu.toggle($event)">
             <i class="pi pi-user"></i>
-            <span>Profile</span>
+            <span>Perfil</span>
         </button>
     </div>
 </div>
