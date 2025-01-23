@@ -35,8 +35,6 @@ export class ListTicketComponent {
       next: (data: TicketResource[]) => {
         this.records = data;
 
-        console.log(data);
-
         this.records.forEach((record) => {
           record.payment_date = record.payment_date ? new Date(<Date>record.payment_date) : null;
         });
