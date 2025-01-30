@@ -42,7 +42,7 @@ export class FormTicketComponent {
       raffle_id: null,
       number: null,
       value: null,
-      payment_date: null
+      payment_date: new Date()
     };
     
     this.formGroup = this.buildFormGroup();
@@ -77,7 +77,7 @@ export class FormTicketComponent {
           raffle_id: this.data.raffle_id,
           number: this.data.number,
           value: this.data.value,
-          payment_date: this.data.payment_date ? new Date(<Date>this.data.payment_date) : null
+          payment_date: this.data.payment_date ? new Date(<Date>this.data.payment_date) : new Date()
         });
 
         this.isLoading = false;
@@ -105,6 +105,13 @@ export class FormTicketComponent {
         this.raffles = res;
 
         this.isLoadingRaffles = false;
+
+        if (this.raffles.length > 0 && !this.raffle_id.value) {
+          this.formGroup.patchValue({
+            raffle_id: this.raffles[this.raffles.length - 1].id
+          });
+          this.onChangeRaffle();
+        }
       }
     });
   }
@@ -191,7 +198,7 @@ export class FormTicketComponent {
     this.location.back();
   }
 
-  onChangeRaffle(event): void {
+  onChangeRaffle(): void {
     this.selectedRaffle = this.raffles.find((raffle) => {
       return raffle.id == this.raffle_id.value
     })

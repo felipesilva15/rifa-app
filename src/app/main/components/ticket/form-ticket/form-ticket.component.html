@@ -8,7 +8,7 @@
             <div class="p-fluid p-formgrid grid mt-1 animation-duration-600 fadein" [formGroup]="formGroup" *ngIf="!isLoading; else loagingSkeleton">
                 <div class="field col-12 md:col-6 py-0">
 					<label htmlFor="raffle_id">Rifa<span class="text-red-500 font-bold">*</span></label>
-					<p-dropdown [options]="raffles" [loading]="isLoadingRaffles" [showClear]="true" optionLabel="name" [filter]="true"  (onChange)="onChangeRaffle($event)" filterBy="name" optionValue="id" id="raffle_id" formControlName="raffle_id" [ngClass]="{'ng-invalid ng-dirty' : raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)}"></p-dropdown>
+					<p-dropdown [options]="raffles" [loading]="isLoadingRaffles" [showClear]="true" optionLabel="name" [filter]="true" filterBy="name" optionValue="id" id="raffle_id" formControlName="raffle_id" [ngClass]="{'ng-invalid ng-dirty' : raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)}"></p-dropdown>
 					<div *ngIf="raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)">
 						<small class="ng-dirty ng-invalid" *ngIf="raffle_id.errors?.['required']">Este campo é obrigatório.</small>
 					</div>

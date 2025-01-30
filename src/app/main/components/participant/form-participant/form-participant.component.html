@@ -26,7 +26,7 @@
 				</div>
                 <div class="field col-12 md:col-6 py-0">
                     <label htmlFor="phone_number">Telefone</label>
-                    <p-inputMask mask="(99) 99999-9999" [unmask]="true" id="phone_number" formControlName="phone_number" [ngClass]="{'ng-invalid ng-dirty' : phone_number.invalid && (phone_number.dirty || phone_number.touched)}"></p-inputMask>
+                    <p-inputMask mask="(99) 99999-9999" [unmask]="true" [autoClear]="false" id="phone_number" formControlName="phone_number" [ngClass]="{'ng-invalid ng-dirty' : phone_number.invalid && (phone_number.dirty || phone_number.touched)}"></p-inputMask>
                     <div *ngIf="phone_number.invalid && (phone_number.dirty || phone_number.touched)">
                         <small class="ng-dirty ng-invalid" *ngIf="phone_number.errors?.['required']">Este campo é obrigatório.</small>
                     </div>
