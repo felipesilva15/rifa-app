@@ -15,6 +15,12 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
+                label: 'Home',
+                items: [
+                    { label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/'] }
+                ]
+            },
+            {
                 label: 'Cadatros',
                 items: [
                     { label: 'Rifas', icon: 'pi pi-fw pi-megaphone', routerLink: ['/raffle'] },

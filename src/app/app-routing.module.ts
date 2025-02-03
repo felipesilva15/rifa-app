@@ -11,6 +11,7 @@ import { authGuard } from './main/guard/auth.guard';
                 path: '', component: AppLayoutComponent,
                 children: [
                     // Main
+                    { path: '', loadChildren: () => import('./main/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'raffle', loadChildren: () => import('./main/components/raffle/raffle.module').then(m => m.RaffleModule) },
                     { path: 'participant', loadChildren: () => import('./main/components/participant/participant.module').then(m => m.ParticipantModule) },
                     { path: 'ticket', loadChildren: () => import('./main/components/ticket/ticket.module').then(m => m.TicketModule) },
