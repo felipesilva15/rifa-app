@@ -1,5 +1,7 @@
+import { TopParticipants } from './top-participants';
 import { DashboardSummary } from "./dashboard-summary";
 
 export interface DashboardData {
-    summary: DashboardSummary
+    summary: DashboardSummary,
+    topParticipants: TopParticipants
 }
