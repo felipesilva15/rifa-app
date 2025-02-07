@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { CustomDynamicDialogService } from './../../../service/custom-dynamic-dialog.service';
+import { Component, ViewChild } from '@angular/core';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { Menu } from 'primeng/menu';
 import { Participant } from 'src/app/main/api/participant';
 import { ParticipantService } from 'src/app/main/service/participant.service';
+import { ParticipantTicketsComponent } from '../participant-tickets/participant-tickets.component';
+import { DialogSize } from 'src/app/main/enum/dialog-size';
 
 @Component({
   selector: 'app-list-participant',
@@ -14,8 +18,11 @@ export class ListParticipantComponent {
   cols: any[] = [];
   isLoading: boolean = true;
   deleteConfirmed: boolean = false;
+  selectedRecord!: Participant;
+  recordMenuItems!: MenuItem[];
+  @ViewChild('recordMenu') recordMenu: Menu;
 
-  constructor(private participantService: ParticipantService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
+  constructor(private participantService: ParticipantService, private messageService: MessageService, private confirmationService: ConfirmationService, private customDynamicDialogService: CustomDynamicDialogService) {}
 
   ngOnInit() {
     this.loadData();
@@ -25,6 +32,16 @@ export class ListParticipantComponent {
       { field: 'name', header: 'Nome' },
       { field: 'email', header: 'Email' },
       { field: 'phone_number', header: 'Telefone' }
+    ];
+
+    this.recordMenuItems = [
+      {
+        label: 'Bilhetes', 
+        icon: 'pi pi-fw pi-ticket',
+        command: () => {
+          this.openParticipantTicketsDialog(this.selectedRecord.id);
+        }
+      }
     ];
   }
 
@@ -91,5 +108,18 @@ export class ListParticipantComponent {
         );
       }
     });
+  }
+
+  openRecordMenu(event: Event, record: Participant) {
+    this.selectedRecord = record;
+    this.recordMenu.toggle(event);
+  }
+
+  openParticipantTicketsDialog(participantId: number) {
+    const data = { 
+      participantId: participantId
+    };
+
+    this.customDynamicDialogService.openDialog<void>(ParticipantTicketsComponent, 'Bilhetes', data, DialogSize.Small);
   }
 }

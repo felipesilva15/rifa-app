@@ -1,0 +1,30 @@
+<p-table [value]="records" [loading]="isLoading" class="w-full" [showLoader]="false">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Número</th>
+            <th>Vl. Bilhete</th>
+            <th>Dt. Pagamento</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record>
+        <tr>
+            <td>{{ record.number }}</td>
+            <td>{{ record.value | currency: 'BRL' }}</td>
+            <td>{{ record.payment_date | date: "dd/MM/Y" }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="3">
+                <div class="flex justify-content-center">Nenhum bilhete comprado.</div>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr *ngFor="let _ of [].constructor(3)">
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+        </tr>
+    </ng-template>
+</p-table>

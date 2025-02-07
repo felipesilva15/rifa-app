@@ -104,6 +104,7 @@
                             <div class="flex flex-nowrap gap-1">
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning" [routerLink]="'form/' + record.id"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteRecord($event, record)"></button>
+                                <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-rounded p-button-secondary" (click)="openRecordMenu($event, record)"></button>
                             </div>
                          </td>
                     </tr>
@@ -125,6 +126,7 @@
                             <div class="flex flex-nowrap gap-1">
                                 <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
                                 <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
+                                <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
                             </div>
                         </td>
                     </tr>
@@ -134,3 +136,4 @@
     </div>
 </div>
 <p-confirmDialog key="confirmDeleteDialog"></p-confirmDialog>
+<p-menu #recordMenu [popup]="true" [model]="recordMenuItems"></p-menu>
