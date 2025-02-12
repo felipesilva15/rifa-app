@@ -12,7 +12,6 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 
-
 @NgModule({
   declarations: [FormTicketComponent],
   imports: [

@@ -93,6 +93,12 @@ export class FormTicketComponent {
         this.participants = res;
 
         this.isLoadingParticipants = false;
+
+        if (this.participants.length > 0 && !this.participant_id.value) {
+          this.formGroup.patchValue({
+            participant_id: this.participants[0].id
+          });
+        }
       }
     });
   }
@@ -108,8 +114,9 @@ export class FormTicketComponent {
 
         if (this.raffles.length > 0 && !this.raffle_id.value) {
           this.formGroup.patchValue({
-            raffle_id: this.raffles[this.raffles.length - 1].id
+            raffle_id: this.raffles[0].id
           });
+
           this.onChangeRaffle();
         }
       }
@@ -201,11 +208,10 @@ export class FormTicketComponent {
   onChangeRaffle(): void {
     this.selectedRaffle = this.raffles.find((raffle) => {
       return raffle.id == this.raffle_id.value
-    })
+    });
 
     if (!this.paramId) {
       this.value.setValue(this.selectedRaffle.ticket_value);
     }
-    
   }
 }
