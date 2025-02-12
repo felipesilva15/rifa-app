@@ -5,6 +5,7 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" [routerLink]="'form'"></button>
+                    <button pButton pRipple label="Em lote" icon="pi pi-plus" class="p-button-secondary mr-2" [routerLink]="'form/batch'"></button>
                     <button pButton pRipple label="Deletar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedRecords($event)" [disabled]="!selectedRecords || !selectedRecords.length"></button>
                 </ng-template>
 

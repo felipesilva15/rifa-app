@@ -1,0 +1,79 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex justify-content-between">
+                <h4>Bilhete</h4>
+				<button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-secondary p-button-text p-0 w-2rem h-2rem" (click)="backPage()"></button>
+			</div>
+            <div class="p-fluid p-formgrid grid mt-1 animation-duration-600 fadein" [formGroup]="formGroup" *ngIf="!isLoading && !isLoadingParticipants && !isLoadingRaffles; else loagingSkeleton">
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="raffle_id">Rifa<span class="text-red-500 font-bold">*</span></label>
+					<p-dropdown [options]="raffles" [loading]="isLoadingRaffles" [showClear]="true" optionLabel="name" [filter]="true" filterBy="name" optionValue="id" id="raffle_id" formControlName="raffle_id" [ngClass]="{'ng-invalid ng-dirty' : raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)}"></p-dropdown>
+					<div *ngIf="raffle_id.invalid && (raffle_id.dirty || raffle_id.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="raffle_id.errors?.['required']">Este campo é obrigatório.</small>
+					</div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="participant_id">Participante<span class="text-red-500 font-bold">*</span></label>
+					<p-dropdown [options]="participants" [loading]="isLoadingParticipants" [showClear]="true" optionLabel="name" [filter]="true" filterBy="name" optionValue="id" id="participant_id" formControlName="participant_id" [ngClass]="{'ng-invalid ng-dirty' : participant_id.invalid && (participant_id.dirty || participant_id.touched)}"></p-dropdown>
+					<div *ngIf="participant_id.invalid && (participant_id.dirty || participant_id.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="participant_id.errors?.['required']">Este campo é obrigatório.</small>
+					</div>
+				</div>
+				<div class="field col-12 md:col-6 py-0">
+					<label htmlFor="numbers">Números<span class="text-red-500 font-bold">*</span></label>
+					<p-chips formControlName="numbers" [allowDuplicate]="false" [showClear]="true" [separator]="'^[\s,|]+$'" [ngClass]="{'ng-invalid ng-dirty' : numbers.invalid && (numbers.dirty || numbers.touched)}" />
+					<div *ngIf="numbers.invalid && (numbers.dirty || numbers.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="numbers.errors?.['required']">Este campo é obrigatório.</small>
+                    </div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="value">Vl. Bilhete</label>
+					<p-inputNumber id="value" formControlName="value" mode="currency" currency="BRL" [min]="0" locale="pt-BR" [showButtons]="true" mode="currency" [ngClass]="{'ng-invalid ng-dirty' : value.invalid && (value.dirty || value.touched)}"></p-inputNumber>
+					<div *ngIf="value.invalid && (value.dirty || value.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="value.errors?.['required']">Este campo é obrigatório.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="value.errors?.['min']">Este campo deve ter no mínimo {{ value.errors?.['min'].min | currency: 'BRL' }}.</small>
+                        <small class="ng-dirty ng-invalid" *ngIf="value.errors?.['max']">Este campo deve ter no máximo {{ value.errors?.['max'].max | currency: 'BRL' }}.</small>
+					</div>
+				</div>
+                <div class="field col-12 md:col-6 py-0">
+					<label htmlFor="payment_date">Dt. Pagamento</label>
+					<p-calendar id="payment_date" type="payment_date" formControlName="payment_date" [showClear]="true" inputId="icon" [showIcon]="true" dateFormat="dd/mm/yy" [ngClass]="{'ng-invalid ng-dirty' : payment_date.invalid && (payment_date.dirty || payment_date.touched)}"></p-calendar>
+					<div *ngIf="payment_date.invalid && (payment_date.dirty || payment_date.touched)">
+						<small class="ng-dirty ng-invalid" *ngIf="payment_date.errors?.['required']">Este campo é obrigatório.</small>
+					</div>
+				</div>
+				<div class="field col-12 flex justify-content-end mb-0 py-0">
+					<button pButton pRipple label="Salvar" class="p-button-primary md:w-min" [loading]="isSubmitting" (click)="submit()"></button>
+				</div>
+			</div>
+            <ng-template #loagingSkeleton >
+				<div class="p-fluid p-formgrid grid mt-1">
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div field class="field col-12 md:col-6 py-0">
+						<p-skeleton height="16px" width="25%" styleClass="mb-2"></p-skeleton>
+						<p-skeleton width="100%" height="39px"></p-skeleton>
+					</div>
+					<div class="field col-12 flex justify-content-end mb-0 py-0">
+						<p-skeleton class="md:w-min" width="80px" height="40px"></p-skeleton>
+					</div>
+				</div>
+			</ng-template>
+        </div>
+    </div>
+</div>

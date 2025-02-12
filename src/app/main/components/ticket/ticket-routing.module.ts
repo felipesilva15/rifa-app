@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./list-ticket/list-ticket.module').then(m => m.ListTicketModule) },
+  { path: 'form/batch', loadChildren: () => import('./batch-form-ticket/batch-form-ticket.module').then(m => m.BatchFormTicketModule) },
   { path: 'form/:id', loadChildren: () => import('./form-ticket/form-ticket.module').then(m => m.FormTicketModule) },
   { path: 'form', loadChildren: () => import('./form-ticket/form-ticket.module').then(m => m.FormTicketModule) }
 ];

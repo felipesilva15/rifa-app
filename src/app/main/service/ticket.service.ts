@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Ticket } from '../api/ticket';
 import { Observable } from 'rxjs';
 import { TicketResource } from '../api/ticketResource';
+import { TicketsInBatch } from '../api/tickets-in-batch';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class TicketService {
 
   create(data: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(`${this.baseUrl}`, data);
+  }
+
+  createInBatch(data: TicketsInBatch): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/batch`, data);
   }
 
   update(data: Ticket, id: number): Observable<Ticket> {
